@@ -1,3 +1,6 @@
 FROM openjdk:8
-ADD target/eurekaserver.jar eurekaserver.jar
-ENTRYPOINT["java","-jar","eurekaserver.jar"]
+RUN apk update && apk bash
+WORKDIR /app
+
+COPY target/eurekaserver.jar /app
+CMD ["java","-jar","eurekaserver.jar"]
