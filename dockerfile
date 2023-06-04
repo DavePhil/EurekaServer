@@ -1,6 +1,12 @@
-FROM openjdk:8
-RUN apk update && apk bash
+FROM eclipse-temurin:17-jdk-jammy
+
 WORKDIR /app
 
-COPY /target/eurekaserver.jar /app
-CMD ["java","-jar","eurekaserver.jar"]
+COPY .mvn/ .mvn
+EXPOSE 8080
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:resolve
+
+COPY src ./src
+
+CMD ["./mvnw", "spring-boot:run"]
