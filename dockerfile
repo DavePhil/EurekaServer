@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM openjdk:17-alpine
 WORKDIR /app
 
 COPY target/eurekaserver.jar /app
